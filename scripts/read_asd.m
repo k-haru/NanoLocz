@@ -45,7 +45,7 @@ header.yRoundDeg = fread(asd_file, 1, 'int'); %Degree of the rounding of y-scann
 header.frameAcqTime = fread(asd_file, 1, 'float'); %Frame acquisition time (ms)
 header.sensorSens = fread(asd_file, 1, 'float'); %Sensor sensitivity (nm/V)
 header.phaseSens = fread(asd_file, 1, 'float'); %Phase sensitivity (deg/V)
-header.offset = fread(asd_file, 1, 'int', 12); %Offset
+header.offset = fread(asd_file, 1, 'int', 16); %Offset
 %reg12byte = fread(asd_file, 1, '12byte'); % Booked region of 12 byte\
 header.machineNum = fread(asd_file, 1, 'int'); %Number of imaging machine
 header.adRange = fread(asd_file, 1, 'int'); %Code showing AD range (AD_1V,AD2P5V, AD_5V of AD_80V)
@@ -70,7 +70,7 @@ for k=1:header.numberFramesCurrent
     header.frameMaxData(k) = fread(asd_file, 1, 'short'); %Maximum data in the frame
     header.frameMinData(k) = fread(asd_file, 1, 'short'); %Minimum data in the frame
     header.xOffset(k) = fread(asd_file, 1, 'short'); %X offset (nm)
-    header.dataType(k) = fread(asd_file, 1, 'short'); %data type
+    header.yOffset(k) = fread(asd_file, 1, 'short'); %X offset (nm)
     header.xTilt(k) = fread(asd_file, 1, 'float'); %X tilt
     header.yTilt(k) = fread(asd_file, 1, 'float'); %Y tilt
     header.flagLaserIr(k) = fread(asd_file, 1, 'bool', 11); %Flag laser radiation
@@ -82,6 +82,6 @@ end
 
 % Invert the image contrast, because Z-piezo extension is the opposite to
 % the sample height
-im=4096-preIm;
+% im=4096-preIm;
 
 end
